@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_lovers/common/social_login_button.dart';
+import 'package:flutter_lovers/common/custom_buttons/social_login_button.dart';
 
 class SignInPage extends StatelessWidget {
   const SignInPage({super.key});
@@ -28,12 +28,38 @@ class SignInPage extends StatelessWidget {
               height: 8,
             ),
             SocialLoginButton(
-              buttonText: 'Facebook ile oturum açın',
-              buttonColor: Color(0xFF334D92),
+              buttonText: 'Gmail ile oturum açın',
+              buttonColor: Colors.grey,
               radius: 16,
-              buttonIcon: Icon(Icons.safety_check),
+              buttonIcon: const Icon(Icons.safety_check),
               onPressed: () {},
-            )
+            ),
+            SocialLoginButton(
+              buttonText: 'Google ile oturum açın',
+              buttonColor: Colors.orange,
+              radius: 16,
+              buttonIcon: Image.asset(
+                'assets/google.jpg',
+                height: 20,
+              ),
+              onPressed: () {},
+            ),
+            SocialLoginButton(
+              buttonText: 'Facebook ile oturum açın',
+              buttonColor: const Color(0xFF334D92),
+              radius: 16,
+              buttonIcon: Image.asset(
+                'assets/facebook.png',
+                height: 20,
+              ),
+              onPressed: () {},
+            ),
+            SocialLoginButton(
+              buttonText: 'Email ve şifre ile oturum açın',
+              radius: 16,
+              buttonIcon: const Icon(Icons.email),
+              onPressed: () {},
+            ),
           ],
         ),
       ),

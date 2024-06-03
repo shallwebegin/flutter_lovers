@@ -4,14 +4,16 @@ class SocialLoginButton extends StatelessWidget {
   const SocialLoginButton(
       {super.key,
       required this.buttonText,
-      required this.buttonColor,
-      required this.radius,
+      this.buttonColor = Colors.purple,
+      this.radius = 16,
+      this.yukseklik = 50,
       required this.buttonIcon,
       required this.onPressed});
 
   final String buttonText;
   final Color buttonColor;
   final double radius;
+  final double yukseklik;
   final Widget buttonIcon;
   final VoidCallback onPressed;
 
@@ -27,7 +29,11 @@ class SocialLoginButton extends StatelessWidget {
           ),
         ),
       ),
-      child: Text(buttonText),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisSize: MainAxisSize.max,
+        children: [buttonIcon, Text(buttonText), Container()],
+      ),
     );
   }
 }
