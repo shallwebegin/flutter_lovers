@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "241159168668",
+    "project_id": "flutter-lovers-b2344",
+    "storage_bucket": "flutter-lovers-b2344.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:241159168668:android:119b327816139a051b0359",
+        "android_client_info": {
+          "package_name": "com.example.flutter_lovers"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBrV5jt3mMqybQxObZMUWGAKTg-sH-F7W4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

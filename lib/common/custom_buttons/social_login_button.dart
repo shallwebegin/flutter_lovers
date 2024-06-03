@@ -6,7 +6,7 @@ class SocialLoginButton extends StatelessWidget {
       required this.buttonText,
       this.buttonColor = Colors.purple,
       this.radius = 16,
-      this.yukseklik = 50,
+      this.yukseklik = 40,
       required this.buttonIcon,
       required this.onPressed});
 
@@ -19,20 +19,26 @@ class SocialLoginButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-      onPressed: onPressed,
-      style: ElevatedButton.styleFrom(
-        backgroundColor: buttonColor,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(
-            Radius.circular(radius),
+    return Container(
+      margin: const EdgeInsets.only(bottom: 8),
+      child: SizedBox(
+        height: yukseklik,
+        child: ElevatedButton(
+          onPressed: onPressed,
+          style: ElevatedButton.styleFrom(
+            backgroundColor: buttonColor,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(
+                Radius.circular(radius),
+              ),
+            ),
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisSize: MainAxisSize.max,
+            children: [buttonIcon, Text(buttonText), Container()],
           ),
         ),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        mainAxisSize: MainAxisSize.max,
-        children: [buttonIcon, Text(buttonText), Container()],
       ),
     );
   }

@@ -1,8 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_lovers/common/custom_buttons/social_login_button.dart';
+import 'package:flutter_lovers/locator.dart';
+import 'package:flutter_lovers/models/user_model.dart';
+import 'package:flutter_lovers/services/auth_base.dart';
+import 'package:flutter_lovers/services/firebase_auth_service.dart';
 
 class SignInPage extends StatelessWidget {
-  const SignInPage({super.key});
+  SignInPage({
+    super.key,
+    required this.onSignIn,
+  });
+  final Function(UserModel) onSignIn;
+  final AuthBase authService = locator<FirebaseAuthService>();
+
+  void _misafirGirisi() async {
+    UserModel user = await authService.signInAnonymously();
+    onSignIn(user);
+    print('Oturum açan user id : ${user.userID}');
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,11 +43,13 @@ class SignInPage extends StatelessWidget {
               height: 8,
             ),
             SocialLoginButton(
-              buttonText: 'Gmail ile oturum açın',
+              buttonText: 'Misafir girişi ile oturum açın',
               buttonColor: Colors.grey,
               radius: 16,
               buttonIcon: const Icon(Icons.safety_check),
-              onPressed: () {},
+              onPressed: () {
+                _misafirGirisi();
+              },
             ),
             SocialLoginButton(
               buttonText: 'Google ile oturum açın',
