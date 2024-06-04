@@ -12,7 +12,7 @@ class UserRepository implements AuthBase {
   final FirebaseAuthService _firebaseAuthService =
       locator<FirebaseAuthService>();
   final FakeAuthService _fakeAuthService = locator<FakeAuthService>();
-  AppMode appMode = AppMode.DEBUG;
+  AppMode appMode = AppMode.RELEASE;
 
   @override
   Future<UserModel> currentUser() async {

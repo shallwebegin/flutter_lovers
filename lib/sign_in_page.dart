@@ -1,21 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_lovers/common/custom_buttons/social_login_button.dart';
-import 'package:flutter_lovers/locator.dart';
 import 'package:flutter_lovers/models/user_model.dart';
-import 'package:flutter_lovers/services/auth_base.dart';
-import 'package:flutter_lovers/services/firebase_auth_service.dart';
+import 'package:flutter_lovers/viewmodel/user_view_model.dart';
+import 'package:provider/provider.dart';
 
 class SignInPage extends StatelessWidget {
-  SignInPage({
+  const SignInPage({
     super.key,
-    required this.onSignIn,
   });
-  final Function(UserModel) onSignIn;
-  final AuthBase authService = locator<FirebaseAuthService>();
 
-  void _misafirGirisi() async {
-    UserModel user = await authService.signInAnonymously();
-    onSignIn(user);
+  void _misafirGirisi(BuildContext context) async {
+    final _userModelView = Provider.of<UserViewModel>(context, listen: false);
+
+    UserModel user = await _userModelView.signInAnonymously();
+
     print('Oturum açan user id : ${user.userID}');
   }
 
@@ -48,7 +46,7 @@ class SignInPage extends StatelessWidget {
               radius: 16,
               buttonIcon: const Icon(Icons.safety_check),
               onPressed: () {
-                _misafirGirisi();
+                _misafirGirisi(context);
               },
             ),
             SocialLoginButton(

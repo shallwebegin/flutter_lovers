@@ -1,62 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_lovers/home_page.dart';
-import 'package:flutter_lovers/locator.dart';
-import 'package:flutter_lovers/models/user_model.dart';
-import 'package:flutter_lovers/services/auth_base.dart';
-import 'package:flutter_lovers/services/firebase_auth_service.dart';
 import 'package:flutter_lovers/sign_in_page.dart';
 
-class LandingPage extends StatefulWidget {
-  const LandingPage({
-    super.key,
-  });
+import 'package:flutter_lovers/viewmodel/user_view_model.dart';
+import 'package:provider/provider.dart';
 
-  @override
-  State<LandingPage> createState() => _LandingPageState();
-}
-
-class _LandingPageState extends State<LandingPage> {
-  UserModel? _user;
-  final AuthBase authService = locator<FirebaseAuthService>();
-  @override
-  void initState() {
-    super.initState();
-    _checkUser();
-  }
+class LandingPage extends StatelessWidget {
+  const LandingPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    if (_user == null) {
-      return SignInPage(
-        onSignIn: (UserModel user) {
-          _updateUser(user);
-        },
-      );
+    final userModel = Provider.of<UserViewModel>(context);
+    if (userModel.state == ViewState.Idle) {
+      if (userModel.user == null) {
+        return const SignInPage();
+      } else {
+        return HomePage(user: userModel.user!);
+      }
     } else {
-      return HomePage(
-        onSignOut: () {
-          _updateUser(null);
-        },
-        user: _user!,
+      return const Scaffold(
+        body: Center(
+          child: CircularProgressIndicator(),
+        ),
       );
     }
-  }
-
-  Future<void> _checkUser() async {
-    try {
-      UserModel? user = await authService.currentUser();
-      setState(() {
-        _user = user;
-      });
-    } catch (e) {
-      print('Hata: $e');
-      // Eğer hata durumunda kullanıcıya bir mesaj göstermek isterseniz, burada yapabilirsiniz.
-    }
-  }
-
-  void _updateUser(UserModel? user) {
-    setState(() {
-      _user = user;
-    });
   }
 }
